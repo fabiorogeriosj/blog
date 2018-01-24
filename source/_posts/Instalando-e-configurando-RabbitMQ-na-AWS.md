@@ -73,3 +73,55 @@ rabbitmqctl set_user_tags admin administrator
 Sendo assim agora consigo acessar o portal de gerenciamento via browser, passando o ip da minha máquina e a porta: `15672`
 
 ![visão portal](/img/visaogeralportalrabbitmq.jpg)
+
+### Exemplo de uso
+
+Para testar o RabbitMQ implementei uma simples aplicação em NodeJS.
+
+#### send.js
+
+```javascript
+const amqp = require('amqplib/callback_api')
+
+amqp.connect('amqp://154.45.12.170', (err, conn) => {
+    if(err) return console.error(err)    
+
+    conn.createChannel((err, ch) => {
+        var q = 'hello'
+
+        ch.assertQueue(q, {durable: false})
+
+        ch.sendToQueue(q, new Buffer('Hello world!'))
+        console.log(' [x] Sent message.')
+
+        setTimeout(() => {
+            conn.close()
+            process.exit(0)
+        }, 500)
+    })
+
+})
+```
+
+#### receive.js
+
+```javascript
+const amqp = require('amqplib/callback_api')
+
+amqp.connect('amqp://154.45.12.170', (err, conn) => {
+    if(err) return console.error(err)    
+
+    conn.createChannel((err, ch) => {
+        var q = 'hello'
+
+        ch.assertQueue(q, {durable: false})
+
+        console.log(" [*] Waiting for messages in %s. To exit press CTRL+C", q)
+        ch.consume(q, (msg) => {
+            console.log(" [x] Received %s", msg.content.toString());
+        }, {noAck: true})
+        
+    })
+
+})
+```
