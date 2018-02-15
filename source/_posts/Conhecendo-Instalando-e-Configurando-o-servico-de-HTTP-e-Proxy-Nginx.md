@@ -57,7 +57,7 @@ Feito isso abri a porta 80 da minha EC2 via portal da AWS e o Nginx está ok:
 
 ![Nginx](/img/nginx1.jpg)
 
-## Configuração Nginx
+## Configuração básica Nginx
 
 Para meu objetivo este seridor será apenas um proxy, servindo como um Gateway de entradas de requisição, sendo assim vamos criar um arquivo de configuração com nossas rotas.
 
@@ -107,4 +107,71 @@ Perceba que se acessar: `http://ip_da_ec2_publica/cep/87050390/json` teremos o r
 
 ## Load Balancing
 
-Continua...
+Para aplicações que precisam de uma performance alta geralmente utilizamos recursos de balanceamento de carga conhecido como `load balancing`. Essa tarefa no eginx é simples e fácil de configurar.
+
+No meu cenário tenho uma API em NodeJS rodando em outro servidor em duas portas diferentes, sendo assim meu config ficou assim:
+
+```
+upstream backend {
+    server 34.238.82.235:8080 weight=1;
+    server 34.238.82.235:8090 weight=2;
+}
+
+server {
+    root /home/ubuntu/www;
+    location / {
+        proxy_pass http://backend;
+    }
+
+    location /cep {
+        proxy_pass https://viacep.com.br/ws;
+    }
+}
+
+```
+
+O parametro `wight` define um peso para cada servidor, ou seja, o servidor `34.238.82.235:8090` irá receber duas vezes a mais a quantidade de requisição.
+
+É possível fazer a mesma coisa com conexões TCP, por exemplo, banco de dados. No meu cenário tenho três máquinas com o banco `MySQL` e os mesmo sincronizando os dados entre eles.
+
+```
+stream {
+    upstream mysql_read {
+        server 34.238.82.235:3306 weight=5;
+        server 34.238.82.222:3306;
+        server 34.238.82.154:3306 backup;
+    }
+    server {
+        listen 3306;
+        proxy_pass mysql_read;
+    }
+}
+```
+
+Perceba que o primeiro servidor `34.238.82.235` irá ter 5 vezes mais de acesso, e o servidor `34.238.82.154` foi marcado como `backup`, isso significa que ele só será acessível pelo balanciamento caso os outros dois servidores estiver offline.
+
+## Métodos de balanceamento 
+
+No nginx existem cinco métodos de balanceamentos cada um com seu algortimo específico:
+
+- `Round robin`
+-- Este é o método padrão quando não definido outro, seu objetivo é distribuir por igual, lenvando em consideração o parametro `weight`, entre os servidores.
+- `Least connections`
+-- Este método leva em consideração a numero de conexões em aberto com os servidores e assim direciona as requisições para aquele que tiver o menor número de conexões em aberto.
+- `Least time`
+-- O melhor na minha opnião porem este método só existente na versão Plus do nginx (versão comercial paga), seu objetivo é semelhante o `Least conections` porem leva em consideração o tempo de resposta dos servidores.
+- `Generic hash`
+-- Bem útil para conhecer de onde vem as conexões, pois para cada ciclo de servidores é criado uma hash que pode ser definido por você ou gerada pelo nginx.
+- `IP hash`
+-- Apenas para HTTP este método tem contorle para todas as requisições vindas do mesmo ip de entrada ser servido pelo mesmo servidor.
+
+## Limite de conexões
+
+Este recurso está ativo apenas na versão Plus do nginx, com ele é possível adicionar o `max_conns` em um ou  mais servidores e controlar o limite de requisição para o mesmo, exemplo:
+
+```
+upstream api {
+    server 34.238.82.235:8080 max_conns=25;
+    server 34.238.82.125:8080 max_conns=15;
+}
+```
