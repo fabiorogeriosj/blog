@@ -175,3 +175,43 @@ upstream api {
     server 34.238.82.125:8080 max_conns=15;
 }
 ```
+
+## Autenticação básica
+
+Nginx vem com alguns recursos de autenticação, desde o básico até OpneID. Neste cenário estarei utilizando o modelo Basic Authorization que consiste em um usuário e senha.
+
+Primeiro preciso ecriptografar uma senha, para isso utilizo o openssl, que após executado exibe a senha no terminal:
+
+```
+openssl passwd senhatemp123
+```
+
+![nginx](/img/nginx2.jpg)
+
+Em seguida criei o arquivo `/etc/nginx/conf.d/passwd` com o seguinte conteudo:
+
+```
+fabio:7nBTuyXqNB/Vk
+```
+
+Agora nas configurações do egnix `/etc/nginx/conf.d/proxyapi.conf` adicione as duas linhas sobre autenticação:
+
+```
+...
+
+location / {
+    auth_basic "Private site";
+    auth_basic_user_file conf.d/passwd;
+    proxy_pass http://backend;
+}
+
+...
+```
+
+Algora se eu tentar acessar via browser ou via requisição é preciso enviar a autenticação:
+
+![nginx](/img/nginx3.jpg)
+
+![nginx](/img/nginx4.jpg)
+
+Observe que o Value para Authorization é a contactenação de `Basic` + Base64 do `usuario:senha`.
