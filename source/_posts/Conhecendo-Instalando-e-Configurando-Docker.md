@@ -1,5 +1,5 @@
 ---
-title: 'Conhecendo, Instalando e Configurando Docker'
+title: Conhecendo, Instalando e Configurando Docker
 date: 2018-02-15 17:02:49
 header-img: /img/bannercontainers.jpg
 tags:
