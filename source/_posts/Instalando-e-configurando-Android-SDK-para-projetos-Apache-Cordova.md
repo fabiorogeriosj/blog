@@ -13,6 +13,8 @@ tags:
 
 Como a Android muda com frequência seu SDK este post precisa de atualizações. Última atualização em: <strong>14/02/2018</strong>
 
+> Se você utiliza Docker veja este post para rodar [Android SDK via Docker](/2018/02/26/Container-Docker-com-Android-SDK-para-projetos-Apache-Cordova/).
+
 Para buildar um app criado com base no [Apache Cordova](https://cordova.apache.org/) precisamos o Android SDK instalado e configurado, e essa tarefa não é complicada mas requer alguns passos que precisam ser seguidos de forma confiável.
 
 Uma forma fácil de realizar essa tarefa porém pode gerar outros problemas é instalar o Android Studio, pois com ele vem o Android SDK, mas essa tarefa querer mais poder de processamento de sua máquina, então vamos utilizar apenas o Tools do Android SDK.
