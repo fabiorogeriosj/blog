@@ -1,0 +1,53 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Raleway', sans-serif;
+}
+body, html {
+    background: -moz-linear-gradient(top, #d06995 0%, #c93bf2 50%, #3bb5fa 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #d06995 0%,#c93bf2 50%,#3bb5fa 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #d06995 0%,#c93bf2 50%,#3bb5fa 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d06995', endColorstr='#3bb5fa',GradientType=0 ); /* IE6-9 */
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    color: #fff;
+    padding: 30px;
+    top: 0;
+    left: 0;
+}
+canvas{
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    margin-top: 100px;
+}
+@media screen and (min-height: 600px) {
+    canvas {
+        max-height: 400px;
+    }
+}
+@media screen and (min-height: 700px) {
+    canvas {
+        max-height: 500px;
+    }
+}
+@media screen and (min-height: 800px) {
+    canvas {
+        max-height: 600px;
+    }
+}
+@media screen and (min-height: 900px) {
+    canvas {
+        max-height: 700px;
+    }
+}
+@media screen and (min-height: 1000px) {
+    canvas {
+        max-height: 800px;
+    }
+}
+a {
+    color: #fff;
+}

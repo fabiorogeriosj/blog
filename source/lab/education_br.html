@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Number of undergraduate students in Brazil by type of institution</title>
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,800" rel="stylesheet">
+    <link rel="stylesheet" href="css/eduation.css">
+</head>
+<body>
+    <h1>Number of undergraduate students in Brazil by type of institution</h1>
+    <p>
+        Using open government data: <a href="http://dados.gov.br/dataset/ensino-superior-graduados" target="_blank">http://dados.gov.br</a>
+    </p>
+    <canvas id="canvas"></canvas>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+    <script src="datasets/formados_instituicoes_federais.js"></script>
+    <script src="datasets/formados_instituicoes_estaduais.js"></script>
+    <script src="datasets/formados_instituicoes_municipais.js"></script>
+    <script src="datasets/formados_instituicoes_privadas.js"></script>
+    <script>
+            var data = {
+                federais:[],
+                estaduais:[],
+                municipais:[],
+                privadas:[]
+            }
+
+            for(type in data) {
+                eval('formados_instituicoes_'+type).valores.map(function (e) {
+                    if(!data[type][e.ano]) {
+                        data[type][e.ano] = 0
+                    }
+                    data[type][e.ano] += e.valor
+                })
+            }
+
+            var YEARS = data.estaduais.reduce(function(e, i, j) {
+                e.push(j)
+                return e
+            }, [])
+            
+            var DATASETS = []
+            var COLORS = ['#9DE0AD', '#FF3D7F', '#EB6841', '#EDC951']
+            var INDEX = 0
+
+            for(type in data) {
+                DATASETS.push({
+                    label: eval('formados_instituicoes_'+type).nome,
+                    backgroundColor: COLORS[INDEX],
+                    borderColor: '#fff',
+                    pointRadius: 10,
+					pointHoverRadius: 10,
+                    data: data[type].reduce(function(e, i, j) {
+                        e.push(i)
+                        return e
+                    }, []),
+                    fill: false,
+                })
+                INDEX++
+            }
+
+            console.log(DATASETS)
+
+    
+            var config = {
+                type: 'line',
+                data: {
+                    labels: YEARS,
+                    datasets: DATASETS
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            fontColor: 'white'
+                        }
+                    },
+                    tooltips: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    hover: {
+                        mode: 'nearest',
+                        intersect: true
+                    },
+                    scales: {
+                        xAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Ano',
+                                fontColor: 'white'
+                            },
+                            ticks: {
+                                beginAtZero: true,
+                                fontColor: 'white',
+                                showLabelBackdrop: false
+                            },
+                            pointLabels: {
+                                fontColor: 'white'
+                            },
+                            gridLines: {
+                                color: 'rgba(255, 255, 255, 0.2)'
+                            },
+                            angleLines: {
+                                color: 'white'
+                            }
+                        }],
+                        yAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Quantidade',
+                                fontColor: 'white'
+                            },
+                            ticks: {
+                                beginAtZero: true,
+                                fontColor: 'white',
+                                showLabelBackdrop: false
+                            },
+                            pointLabels: {
+                                fontColor: 'white'
+                            },
+                            gridLines: {
+                                color: 'rgba(255, 255, 255, 0.2)'
+                            },
+                            angleLines: {
+                                color: 'white'
+                            }
+                        }]
+                    }
+                }
+            }
+    
+            var ctx = document.getElementById('canvas').getContext('2d')
+            window.myLine = new Chart(ctx, config)
+    
+        </script>
+</body>
+</html>
