@@ -11,7 +11,8 @@ comments: true
 Reunindo minha experiencia de anos de desenvolvimento em projetos web e mobile, e também
 minha experiencia em ensino superior, ofereço alguns cursos VIP (presencial ou a distância via Skype ou Hangout) com o conteúdo mais complexo possível para preparar profissionais para o mundo do desenvolvimento.
 
-As aulas são individuais, ou podem ser para um grupo de no máximo de 4 alunos, para que a imersão seja completa e eficiente.
+As aulas podem ser individuais ou para uma empresa (In-House).
+
 
 Saiba mais falando comigo :)
 fabio.rogerio.sj@gmail.com
