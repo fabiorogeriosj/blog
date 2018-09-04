@@ -66,12 +66,18 @@ featured-condition-size: 1              # A tag will be featured if the size of 
 # Friends
 friends: [
     {
+        title: "MobileUI",
+        href: "https://mobileui.github.io"
+    },
+    {
         title: "Ionic Framework",
         href: "http://ionicframework.com"
-    },{
+    },
+    {
         title: "ngCordova",
         href: "http://ngCordova.com"
-    },{
+    },
+    {
         title: "Apache Cordova",
         href: "https://cordova.apache.org/"
     }
