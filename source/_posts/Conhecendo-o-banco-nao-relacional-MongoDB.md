@@ -49,5 +49,5 @@ O desempenho incrível é uma meta importante para o MongoDB e moldou grande par
 
 Embora o MongoDB seja poderoso e tente manter muitos recursos de sistemas relacionamentos, não se destina a fazer tudo o que um banco de dados relacional faz. Sempre que possível, o servidor de banco de dados transfere o processamento e a lógica para o lado do cliente pelos drivers ou pelo código do aplicativo de um usuário. Mantendo este design simplificado é uma das razões pelas quais o MongoDB pode alcançar um desempenho tão alto.
 
-
+Agora que você sabe a motivação de utilizar o MongoDB vamos aos [primeiros passos](/2018/09/05/Primeiros-passos-com-MongoDB/).
 
