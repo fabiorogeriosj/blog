@@ -9,6 +9,8 @@ tags:
 - Gradle
 ---
 
+### Para usuários Linux veja [este post](/2019/03/06/Instalando-e-configurando-Android-SDK-para-projetos-Apache-Cordova-no-Linux/)
+
 > Se você utiliza Cordova/MobileUI/Ionic/Phonegap e outros frameworks que utilizam o Apache Cordova para buildar os apps finais (.apk) certamente precisa do ambiente do Android SDK configurado, então este post é para você.
 
 Como a Android muda com frequência seu SDK este post precisa de atualizações. Última atualização em: <strong>14/02/2018</strong>
