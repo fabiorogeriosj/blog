@@ -12,6 +12,6 @@ Fábio Rogério da Silva José​, conhecido como Fábio Rogério SJ nas redes s
 
 ![Curso de Férias Benner 2016 - Ionic Framework](/img/treinamento_ionic.jpg)
 
-Fábio Rogério já passou por várias empresas reconhecidas em Maringá como SG Sistemas, Benner Software, Publisoft e atualmente trabalha como engenheiro no Grupo Tecnospeed e presta serviço de consultoria e treinamento em desenvolvimento de aplicações web e mobile utilizando tecnologias híbridas.
+Fábio Rogério já passou por várias empresas reconhecidas em Maringá como SG Sistemas, Benner Software, Publisoft, Grupo Tecnospeed. Atualmente é Consultor em Arquitetura de Sistemas T.I no Grupo Boticário e presta serviço de consultoria e treinamento em desenvolvimento de aplicações web e mobile utilizando tecnologias híbridas.
 
-Fábio também é professor, de curso superior, onde ministra as disciplinas de desenvolvimento frontend, desenvolvimento de aplicativos móveis, web design, design de interação e lógica de programação.
+Fábio também foi professor, de curso superior, onde ministrava as disciplinas de desenvolvimento frontend, desenvolvimento de aplicativos móveis, web design, design de interação e lógica de programação.
